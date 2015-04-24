@@ -5,25 +5,52 @@ input_shape {
     dim: 2048
 }
 layer {
-  name: "ip2"
-  type: "InnerProduct"
-  bottom: "data"
-  top: "ip2"
-  param {
-    lr_mult: 1
-  }
-  param {
-    lr_mult: 2
-  }
-  inner_product_param {
-    num_output: 10
-    weight_filler {
-      type: "xavier"
+    name:   "ip1"
+    type:   "InnerProduct"
+    bottom: "data"
+    top:    "ip1"
+    param {
+        lr_mult: 1
     }
-    bias_filler {
-      type: "constant"
+    param {
+        lr_mult: 2
     }
-  }
+    inner_product_param {
+        num_output: 4069
+        weight_filler {
+            type: "xavier"
+        }
+        bias_filler {
+            type: "constant"
+        }
+    }
+}
+layer {
+    name:   "tanh1"
+    type:   "TanH"
+    bottom: "ip1"
+    top:    "tanh1"
+}
+layer {
+    name:   "ip2"
+    type:   "InnerProduct"
+    bottom: "tanh1"
+    top:    "ip2"
+    param {
+        lr_mult: 1
+    }
+    param {
+        lr_mult: 2
+    }
+    inner_product_param {
+        num_output: 10
+        weight_filler {
+            type: "xavier"
+        }
+        bias_filler {
+            type: "constant"
+        }
+    }
 }
 layer {
   name: "prob"
