@@ -4,7 +4,7 @@ import h5py
 import numpy as np
 
 from sklearn                import preprocessing, metrics, cross_validation, linear_model
-from sklearn.decomposition   import PCA
+from sklearn.decomposition  import PCA
 
 
 def load_input(inpath):
